@@ -66,46 +66,30 @@ module.exports = function( grunt ) {
 				}
 			}
 		},
-		{% if ('sass' === css_type) { %}
-		sass:   {
+		sass: {
 			all: {
 				files: {
 					'css/{%= js_safe_name %}.css': 'css/sass/{%= js_safe_name %}.sass'
 				}
 			}
 		},
-		{% } else if ('less' === css_type) { %}
-		less:   {
-			all: {
-				files: {
-					'css/{%= js_safe_name %}.css': 'css/less/{%= js_safe_name %}.less'
-				}
-			}		
-		},
-		{% } %}
 		cssmin: {
 			options: {
 				banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
 					' * <%= pkg.homepage %>\n' +
-					' * Copyright (c) <%= grunt.template.today("yyyy") %>;' +
-					' * Licensed GPLv2+' +
+					' * Copyright (c) <%= grunt.template.today("yyyy") %> {%= author_name %}\n' +
+					' * Licensed GPLv2+\n' +
 					' */\n'
 			},
 			minify: {
 				expand: true,
-				{% if ('sass' === css_type || 'less' === css_type) { %}
-				cwd: 'css/',				
+				cwd: 'css/',
 				src: ['{%= js_safe_name %}.css'],
-				{% } else { %}
-				cwd: 'css/src/',
-				src: ['{%= js_safe_name %}.css'],
-				{% } %}
 				dest: 'css/',
 				ext: '.min.css'
 			}
 		},
 		watch:  {
-			{% if ('sass' === css_type) { %}
 			sass: {
 				files: ['css/sass/*.sass'],
 				tasks: ['sass', 'cssmin'],
@@ -113,23 +97,6 @@ module.exports = function( grunt ) {
 					debounceDelay: 500
 				}
 			},
-			{% } else if ('less' === css_type) { %}
-			less: {
-				files: ['css/less/*.less'],
-				tasks: ['less', 'cssmin'],
-				options: {
-					debounceDelay: 500
-				}
-			},
-			{% } else { %}
-			styles: {
-				files: ['css/src/*.css'],
-				tasks: ['cssmin'],
-				options: {
-					debounceDelay: 500
-				}
-			},
-			{% } %}
 			scripts: {
 				files: ['js/**/*.coffee', 'js/vendor/**/*.js'],
 				tasks: ['coffee', 'jshint', /*'concat',*/ 'uglify'],
@@ -181,25 +148,15 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks('grunt-contrib-coffee');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
-	{% if ('sass' === css_type) { %}
 	grunt.loadNpmTasks('grunt-contrib-sass');
-	{% } else if ('less' === css_type) { %}
-	grunt.loadNpmTasks('grunt-contrib-less');
-	{% } %}
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks( 'grunt-contrib-clean' );
 	grunt.loadNpmTasks( 'grunt-contrib-copy' );
 	grunt.loadNpmTasks( 'grunt-contrib-compress' );
-	
+
 	// Default task.
-	{% if ('sass' === css_type) { %}
 	grunt.registerTask( 'default', ['coffee', 'jshint', /*'concat',*/ 'uglify', 'sass', 'cssmin'] );
-	{% } else if ('less' === css_type) { %}
-	grunt.registerTask( 'default', ['coffee', 'jshint', /*'concat',*/ 'uglify', 'less', 'cssmin'] );
-	{% } else { %}
-	grunt.registerTask( 'default', ['coffee', 'jshint', /*'concat',*/ 'uglify', 'cssmin'] );
-	{% } %}
-	
+
 	grunt.registerTask( 'build', ['default', 'clean', 'copy', 'compress'] );
 
 	grunt.util.linefeed = '\n';

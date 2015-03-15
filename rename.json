@@ -1,6 +1,5 @@
 {
 	"plugin.php": "{%= js_safe_name %}.php",
-	"css/less/plugin.less": "css/less/{%= js_safe_name %}.less",
 	"css/sass/plugin.sass": "css/sass/{%= js_safe_name %}.sass",
 	"css/src/plugin.css": "css/src/{%= js_safe_name %}.css",
 	"js/plugin.coffee": "js/{%= js_safe_name %}.coffee",
