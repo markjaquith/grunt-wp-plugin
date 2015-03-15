@@ -7,7 +7,7 @@
  * Author:      {%= author_name %}
  * Author URI:  {%= author_url %}
  * License:     GPLv2+
- * Text Domain: {%= prefix %}
+ * Text Domain: {%= prefix_dashed %}
  * Domain Path: /languages
  */
 

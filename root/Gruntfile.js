@@ -10,9 +10,9 @@ module.exports = function( grunt ) {
 			},
 			{%= js_safe_name %}: {
 				src: [
-					'js/{%= js_safe_name %}.js'
+					'js/{%= prefix_dashed %}.js'
 				],
-				dest: 'js/{%= js_safe_name %}.js'
+				dest: 'js/{%= prefix_dashed %}.js'
 			}
 		},
 		*/
@@ -22,7 +22,7 @@ module.exports = function( grunt ) {
 					sourceMap: true
 				},
 				files: {
-					'js/{%= js_safe_name %}.js': 'js/{%= js_safe_name %}.coffee'
+					'js/{%= prefix_dashed %}.js': 'js/{%= prefix_dashed %}.coffee'
 				}
 			}
 		},
@@ -61,7 +61,7 @@ module.exports = function( grunt ) {
 		uglify: {
 			all: {
 				files: {
-					'js/{%= js_safe_name %}.min.js': ['js/{%= js_safe_name %}.js']
+					'js/{%= prefix_dashed %}.min.js': ['js/{%= prefix_dashed %}.js']
 				},
 				options: {
 					banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
@@ -70,7 +70,7 @@ module.exports = function( grunt ) {
 						' * Licensed GPLv2+\n' +
 						' */\n',
 					sourceMap: true,
-					sourceMapIn: 'js/{%= js_safe_name %}.js.map',
+					sourceMapIn: 'js/{%= prefix_dashed %}.js.map',
 					mangle: {
 						except: ['jQuery']
 					}
@@ -80,7 +80,7 @@ module.exports = function( grunt ) {
 		sass: {
 			all: {
 				files: {
-					'css/{%= js_safe_name %}.css': 'css/{%= js_safe_name %}.sass'
+					'css/{%= prefix_dashed %}.css': 'css/{%= prefix_dashed %}.sass'
 				}
 			}
 		},
@@ -95,7 +95,7 @@ module.exports = function( grunt ) {
 			minify: {
 				expand: true,
 				cwd: 'css/',
-				src: ['{%= js_safe_name %}.css'],
+				src: ['{%= prefix_dashed %}.css'],
 				dest: 'css/',
 				ext: '.min.css'
 			}
@@ -143,12 +143,12 @@ module.exports = function( grunt ) {
 			main: {
 				options: {
 					mode: 'zip',
-					archive: './release/{%= js_safe_name %}.<%= pkg.version %>.zip'
+					archive: './release/{%= prefix_dashed %}.<%= pkg.version %>.zip'
 				},
 				expand: true,
 				cwd: 'release/<%= pkg.version %>/',
 				src: ['**/*'],
-				dest: '{%= js_safe_name %}/'
+				dest: '{%= prefix_dashed %}/'
 			}		
 		}
 	} );

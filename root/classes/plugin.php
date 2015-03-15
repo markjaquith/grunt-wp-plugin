@@ -41,6 +41,6 @@ class {%= prefix %}_Plugin extends WP_Stack_Plugin2 {
 	}
 
 	public function init() {
-		$this->load_textdomain( '{%= prefix %}', '/languages' );
+		$this->load_textdomain( '{%= prefix_dashed %}', '/languages' );
 	}
 }

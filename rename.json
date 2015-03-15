@@ -1,6 +1,6 @@
 {
-	"plugin.php": "{%= js_safe_name %}.php",
-	"css/plugin.sass": "css/{%= js_safe_name %}.sass",
-	"js/plugin.coffee": "js/{%= js_safe_name %}.coffee",
-	"languages/plugin.pot": "languages/{%= prefix %}.pot"
+	"plugin.php": "{%= prefix_dashed %}.php",
+	"css/plugin.sass": "css/{%= prefix_dashed %}.sass",
+	"js/plugin.coffee": "js/{%= prefix_dashed %}.coffee",
+	"languages/plugin.pot": "languages/{%= prefix_dashed %}.pot"
 }

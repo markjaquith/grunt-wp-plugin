@@ -60,9 +60,13 @@ exports.template = function( grunt, init, done ) {
 		// Sanitize names where we need to for PHP/JS
 		props.name = props.title.replace( /\s+/g, '-' ).toLowerCase();
 		// Development prefix (i.e. to prefix PHP function names, variables)
-		props.prefix = props.prefix.replace('/[^a-z_]/i', '').toLowerCase();
+		props.prefix = props.prefix.replace('/[^a-z_]/i', '');
+		// Lower case name
+		props.prefix_lower = props.prefix.toLowerCase();
 		// Development prefix in all caps (e.g. for constants)
 		props.prefix_caps = props.prefix.toUpperCase();
+		// Lower case dashed name
+		props.prefix_dashed = props.prefix_lower.replace(/_+/g, '-');
 		// An additional value, safe to use as a JavaScript identifier.
 		props.js_safe_name = props.name.replace(/[\W_]+/g, '_').replace(/^(\d)/, '_$1');
 		// An additional value that won't conflict with NodeUnit unit tests.
@@ -72,7 +76,7 @@ exports.template = function( grunt, init, done ) {
 		// Files to copy and process
 		var files = init.filesToCopy( props );
 
-		console.log( files );
+		// console.log( files );
 
 		// Actually copy and process files
 		init.copyAndProcess( files, props );
