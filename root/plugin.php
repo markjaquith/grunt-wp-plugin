@@ -29,50 +29,9 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-/**
- * Built using grunt-wp-plugin
- * Copyright (c) 2013 10up, LLC
- * https://github.com/10up/grunt-wp-plugin
- */
+defined( 'WPINC' ) or die;
 
-// Useful global constants
-define( '{%= prefix_caps %}_VERSION', '0.1.0' );
-define( '{%= prefix_caps %}_URL',     plugin_dir_url( __FILE__ ) );
-define( '{%= prefix_caps %}_PATH',    dirname( __FILE__ ) . '/' );
-
-/**
- * Default initialization for the plugin:
- * - Registers the default textdomain.
- */
-function {%= prefix %}_init() {
-	$locale = apply_filters( 'plugin_locale', get_locale(), '{%= prefix %}' );
-	load_textdomain( '{%= prefix %}', WP_LANG_DIR . '/{%= prefix %}/{%= prefix %}-' . $locale . '.mo' );
-	load_plugin_textdomain( '{%= prefix %}', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-}
-
-/**
- * Activate the plugin
- */
-function {%= prefix %}_activate() {
-	// First load the init scripts in case any rewrite functionality is being loaded
-	{%= prefix %}_init();
-
-	flush_rewrite_rules();
-}
-register_activation_hook( __FILE__, '{%= prefix %}_activate' );
-
-/**
- * Deactivate the plugin
- * Uninstall routines should be in uninstall.php
- */
-function {%= prefix %}_deactivate() {
-
-}
-register_deactivation_hook( __FILE__, '{%= prefix %}_deactivate' );
-
-// Wireup actions
-add_action( 'init', '{%= prefix %}_init' );
-
-// Wireup filters
-
-// Wireup shortcodes
+// Pull in the plugin classes and initialize
+include( dirname( __FILE__ ) . '/lib/wp-stack-plugin.php' );
+include( dirname( __FILE__ ) . '/classes/plugin.php' );
+{%= prefix %}_Plugin::start( __FILE__ );
