@@ -1,7 +1,6 @@
 {
 	"plugin.php": "{%= js_safe_name %}.php",
-	"css/sass/plugin.sass": "css/sass/{%= js_safe_name %}.sass",
-	"css/src/plugin.css": "css/src/{%= js_safe_name %}.css",
+	"css/plugin.sass": "css/{%= js_safe_name %}.sass",
 	"js/plugin.coffee": "js/{%= js_safe_name %}.coffee",
 	"languages/plugin.pot": "languages/{%= prefix %}.pot"
 }

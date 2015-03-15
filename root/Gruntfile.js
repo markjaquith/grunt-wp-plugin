@@ -69,7 +69,7 @@ module.exports = function( grunt ) {
 		sass: {
 			all: {
 				files: {
-					'css/{%= js_safe_name %}.css': 'css/sass/{%= js_safe_name %}.sass'
+					'css/{%= js_safe_name %}.css': 'css/{%= js_safe_name %}.sass'
 				}
 			}
 		},
@@ -91,7 +91,7 @@ module.exports = function( grunt ) {
 		},
 		watch:  {
 			sass: {
-				files: ['css/sass/*.sass'],
+				files: ['css/*.sass'],
 				tasks: ['sass', 'cssmin'],
 				options: {
 					debounceDelay: 500
@@ -117,7 +117,7 @@ module.exports = function( grunt ) {
 					'!release/**',
 					'!.git/**',
 					'!.sass-cache/**',
-					'!css/src/**',
+					'!css/**/*.sass',
 					'!js/**/*.coffee',
 					'!img/src/**',
 					'!Gruntfile.js',
