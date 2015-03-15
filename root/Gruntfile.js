@@ -3,27 +3,32 @@ module.exports = function( grunt ) {
 	// Project configuration
 	grunt.initConfig( {
 		pkg:    grunt.file.readJSON( 'package.json' ),
+		/*
 		concat: {
 			options: {
-				stripBanners: true,
-				banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
-					' * <%= pkg.homepage %>\n' +
-					' * Copyright (c) <%= grunt.template.today("yyyy") %>;' +
-					' * Licensed GPLv2+' +
-					' */\n'
+				stripBanners: true
 			},
 			{%= js_safe_name %}: {
 				src: [
-					'assets/js/src/{%= js_safe_name %}.js'
+					'assets/js/{%= js_safe_name %}.js'
 				],
 				dest: 'assets/js/{%= js_safe_name %}.js'
 			}
 		},
+		*/
+		coffee: {
+			compileWithMaps: {
+				options: {
+					sourceMap: true
+				},
+				files: {
+					'assets/js/{%= js_safe_name %}.js': 'assets/js/{%= js_safe_name %}.coffee'
+				}
+			}
+		},
 		jshint: {
 			all: [
-				'Gruntfile.js',
-				'assets/js/src/**/*.js',
-				'assets/js/test/**/*.js'
+				'Gruntfile.js'
 			],
 			options: {
 				curly:   true,
@@ -50,17 +55,16 @@ module.exports = function( grunt ) {
 				options: {
 					banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
 						' * <%= pkg.homepage %>\n' +
-						' * Copyright (c) <%= grunt.template.today("yyyy") %>;' +
-						' * Licensed GPLv2+' +
+						' * Copyright (c) <%= grunt.template.today("yyyy") %> {%= author_name %}\n' +
+						' * Licensed GPLv2+\n' +
 						' */\n',
+					sourceMap: true,
+					sourceMapIn: 'assets/js/{%= js_safe_name %}.js.map',
 					mangle: {
 						except: ['jQuery']
 					}
 				}
 			}
-		},
-		test:   {
-			files: ['assets/js/test/**/*.js']
 		},
 		{% if ('sass' === css_type) { %}
 		sass:   {
@@ -127,8 +131,8 @@ module.exports = function( grunt ) {
 			},
 			{% } %}
 			scripts: {
-				files: ['assets/js/src/**/*.js', 'assets/js/vendor/**/*.js'],
-				tasks: ['jshint', 'concat', 'uglify'],
+				files: ['assets/js/**/*.coffee', 'assets/js/vendor/**/*.js'],
+				tasks: ['coffee', 'jshint', /*'concat',*/ 'uglify'],
 				options: {
 					debounceDelay: 500
 				}
@@ -147,7 +151,7 @@ module.exports = function( grunt ) {
 					'!.git/**',
 					'!.sass-cache/**',
 					'!css/src/**',
-					'!js/src/**',
+					'!js/**/*.coffee',
 					'!img/src/**',
 					'!Gruntfile.js',
 					'!package.json',
@@ -174,6 +178,7 @@ module.exports = function( grunt ) {
 	// Load other tasks
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-coffee');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	{% if ('sass' === css_type) { %}
@@ -188,11 +193,11 @@ module.exports = function( grunt ) {
 	
 	// Default task.
 	{% if ('sass' === css_type) { %}
-	grunt.registerTask( 'default', ['jshint', 'concat', 'uglify', 'sass', 'cssmin'] );
+	grunt.registerTask( 'default', ['coffee', 'jshint', /*'concat',*/ 'uglify', 'sass', 'cssmin'] );
 	{% } else if ('less' === css_type) { %}
-	grunt.registerTask( 'default', ['jshint', 'concat', 'uglify', 'less', 'cssmin'] );
+	grunt.registerTask( 'default', ['coffee', 'jshint', /*'concat',*/ 'uglify', 'less', 'cssmin'] );
 	{% } else { %}
-	grunt.registerTask( 'default', ['jshint', 'concat', 'uglify', 'cssmin'] );
+	grunt.registerTask( 'default', ['coffee', 'jshint', /*'concat',*/ 'uglify', 'cssmin'] );
 	{% } %}
 	
 	grunt.registerTask( 'build', ['default', 'clean', 'copy', 'compress'] );

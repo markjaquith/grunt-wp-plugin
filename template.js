@@ -49,6 +49,7 @@ exports.template = function( grunt, init, done ) {
 		props.devDependencies = {
 			'grunt': '~0.4.5',
 			'grunt-contrib-concat':   '~0.5.0',
+			'grunt-contrib-coffee':   '~0.13.0',
 			'grunt-contrib-uglify':   '~0.6.0',
 			'grunt-contrib-cssmin':   '~0.10.0',
 			'grunt-contrib-jshint':   '~0.10.0',
