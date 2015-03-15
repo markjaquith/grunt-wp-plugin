@@ -1,8 +1,8 @@
 {
 	"plugin.php": "{%= js_safe_name %}.php",
-	"assets/css/less/plugin.less": "assets/css/less/{%= js_safe_name %}.less",
-	"assets/css/sass/plugin.sass": "assets/css/sass/{%= js_safe_name %}.sass",
-	"assets/css/src/plugin.css": "assets/css/src/{%= js_safe_name %}.css",
-	"assets/js/plugin.coffee": "assets/js/{%= js_safe_name %}.coffee",
+	"css/less/plugin.less": "css/less/{%= js_safe_name %}.less",
+	"css/sass/plugin.sass": "css/sass/{%= js_safe_name %}.sass",
+	"css/src/plugin.css": "css/src/{%= js_safe_name %}.css",
+	"js/plugin.coffee": "js/{%= js_safe_name %}.coffee",
 	"languages/plugin.pot": "languages/{%= prefix %}.pot"
 }

@@ -10,9 +10,9 @@ module.exports = function( grunt ) {
 			},
 			{%= js_safe_name %}: {
 				src: [
-					'assets/js/{%= js_safe_name %}.js'
+					'js/{%= js_safe_name %}.js'
 				],
-				dest: 'assets/js/{%= js_safe_name %}.js'
+				dest: 'js/{%= js_safe_name %}.js'
 			}
 		},
 		*/
@@ -22,7 +22,7 @@ module.exports = function( grunt ) {
 					sourceMap: true
 				},
 				files: {
-					'assets/js/{%= js_safe_name %}.js': 'assets/js/{%= js_safe_name %}.coffee'
+					'js/{%= js_safe_name %}.js': 'js/{%= js_safe_name %}.coffee'
 				}
 			}
 		},
@@ -50,7 +50,7 @@ module.exports = function( grunt ) {
 		uglify: {
 			all: {
 				files: {
-					'assets/js/{%= js_safe_name %}.min.js': ['assets/js/{%= js_safe_name %}.js']
+					'js/{%= js_safe_name %}.min.js': ['js/{%= js_safe_name %}.js']
 				},
 				options: {
 					banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
@@ -59,7 +59,7 @@ module.exports = function( grunt ) {
 						' * Licensed GPLv2+\n' +
 						' */\n',
 					sourceMap: true,
-					sourceMapIn: 'assets/js/{%= js_safe_name %}.js.map',
+					sourceMapIn: 'js/{%= js_safe_name %}.js.map',
 					mangle: {
 						except: ['jQuery']
 					}
@@ -70,7 +70,7 @@ module.exports = function( grunt ) {
 		sass:   {
 			all: {
 				files: {
-					'assets/css/{%= js_safe_name %}.css': 'assets/css/sass/{%= js_safe_name %}.sass'
+					'css/{%= js_safe_name %}.css': 'css/sass/{%= js_safe_name %}.sass'
 				}
 			}
 		},
@@ -78,7 +78,7 @@ module.exports = function( grunt ) {
 		less:   {
 			all: {
 				files: {
-					'assets/css/{%= js_safe_name %}.css': 'assets/css/less/{%= js_safe_name %}.less'
+					'css/{%= js_safe_name %}.css': 'css/less/{%= js_safe_name %}.less'
 				}
 			}		
 		},
@@ -94,20 +94,20 @@ module.exports = function( grunt ) {
 			minify: {
 				expand: true,
 				{% if ('sass' === css_type || 'less' === css_type) { %}
-				cwd: 'assets/css/',				
+				cwd: 'css/',				
 				src: ['{%= js_safe_name %}.css'],
 				{% } else { %}
-				cwd: 'assets/css/src/',
+				cwd: 'css/src/',
 				src: ['{%= js_safe_name %}.css'],
 				{% } %}
-				dest: 'assets/css/',
+				dest: 'css/',
 				ext: '.min.css'
 			}
 		},
 		watch:  {
 			{% if ('sass' === css_type) { %}
 			sass: {
-				files: ['assets/css/sass/*.sass'],
+				files: ['css/sass/*.sass'],
 				tasks: ['sass', 'cssmin'],
 				options: {
 					debounceDelay: 500
@@ -115,7 +115,7 @@ module.exports = function( grunt ) {
 			},
 			{% } else if ('less' === css_type) { %}
 			less: {
-				files: ['assets/css/less/*.less'],
+				files: ['css/less/*.less'],
 				tasks: ['less', 'cssmin'],
 				options: {
 					debounceDelay: 500
@@ -123,7 +123,7 @@ module.exports = function( grunt ) {
 			},
 			{% } else { %}
 			styles: {
-				files: ['assets/css/src/*.css'],
+				files: ['css/src/*.css'],
 				tasks: ['cssmin'],
 				options: {
 					debounceDelay: 500
@@ -131,7 +131,7 @@ module.exports = function( grunt ) {
 			},
 			{% } %}
 			scripts: {
-				files: ['assets/js/**/*.coffee', 'assets/js/vendor/**/*.js'],
+				files: ['js/**/*.coffee', 'js/vendor/**/*.js'],
 				tasks: ['coffee', 'jshint', /*'concat',*/ 'uglify'],
 				options: {
 					debounceDelay: 500

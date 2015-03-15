@@ -77,23 +77,23 @@ exports.template = function( grunt, init, done ) {
 
 		switch( props.css_type.toLowerCase()[0] ) {
 			case 'l':
-				delete files[ 'assets/css/sass/' + props.js_safe_name + '.sass'];
-				delete files[ 'assets/css/src/' + props.js_safe_name + '.css' ];
+				delete files[ 'css/sass/' + props.js_safe_name + '.sass'];
+				delete files[ 'css/src/' + props.js_safe_name + '.css' ];
 
 				props.devDependencies["grunt-contrib-less"] = "~0.11.2";
 				props.css_type = 'less';
 				break;
 			case 'n':
 			case undefined:
-				delete files[ 'assets/css/less/' + props.js_safe_name + '.less'];
-				delete files[ 'assets/css/sass/' + props.js_safe_name + '.sass'];
+				delete files[ 'css/less/' + props.js_safe_name + '.less'];
+				delete files[ 'css/sass/' + props.js_safe_name + '.sass'];
 
 				props.css_type = 'none';
 				break;
 			// SASS is the default
 			default:
-				delete files[ 'assets/css/less/' + props.js_safe_name + '.less'];
-				delete files[ 'assets/css/src/' + props.js_safe_name + '.css' ];
+				delete files[ 'css/less/' + props.js_safe_name + '.less'];
+				delete files[ 'css/src/' + props.js_safe_name + '.css' ];
 
 				props.devDependencies["grunt-contrib-sass"] = "~0.8.0";
 				props.css_type = 'sass';
