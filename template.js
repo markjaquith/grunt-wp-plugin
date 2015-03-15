@@ -45,6 +45,7 @@ exports.template = function( grunt, init, done ) {
 			'grunt': '~0.4.5',
 			'grunt-contrib-concat':   '~0.5.0',
 			'grunt-contrib-coffee':   '~0.13.0',
+			'grunt-coffeelint':       '~0.0.13',
 			'grunt-contrib-uglify':   '~0.6.0',
 			'grunt-contrib-sass':     '~0.8.0',
 			'grunt-contrib-cssmin':   '~0.10.0',

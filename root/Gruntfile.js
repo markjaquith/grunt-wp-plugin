@@ -26,6 +26,17 @@ module.exports = function( grunt ) {
 				}
 			}
 		},
+		coffeelint: {
+			all: ['js/*.coffee'],
+			options: {
+				no_tabs: {
+					level: 'ignore'
+				},
+				indentation: {
+					level: 'ignore'
+				}
+			}
+		},
 		jshint: {
 			all: [
 				'Gruntfile.js'
@@ -54,7 +65,7 @@ module.exports = function( grunt ) {
 				},
 				options: {
 					banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
-						' * <%= pkg.homepage %>\n' +
+						' *\n' +
 						' * Copyright (c) <%= grunt.template.today("yyyy") %> {%= author_name %}\n' +
 						' * Licensed GPLv2+\n' +
 						' */\n',
@@ -76,7 +87,7 @@ module.exports = function( grunt ) {
 		cssmin: {
 			options: {
 				banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
-					' * <%= pkg.homepage %>\n' +
+					' *\n' +
 					' * Copyright (c) <%= grunt.template.today("yyyy") %> {%= author_name %}\n' +
 					' * Licensed GPLv2+\n' +
 					' */\n'
@@ -99,7 +110,7 @@ module.exports = function( grunt ) {
 			},
 			scripts: {
 				files: ['js/**/*.coffee', 'js/vendor/**/*.js'],
-				tasks: ['coffee', 'jshint', /*'concat',*/ 'uglify'],
+				tasks: ['coffeelint', 'coffee', 'jshint', /*'concat',*/ 'uglify'],
 				options: {
 					debounceDelay: 500
 				}
@@ -146,6 +157,7 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-coffee');
+	grunt.loadNpmTasks('grunt-coffeelint');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-sass');
@@ -155,7 +167,7 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( 'grunt-contrib-compress' );
 
 	// Default task.
-	grunt.registerTask( 'default', ['coffee', 'jshint', /*'concat',*/ 'uglify', 'sass', 'cssmin'] );
+	grunt.registerTask( 'default', ['coffeelint', 'coffee', 'jshint', /*'concat',*/ 'uglify', 'sass', 'cssmin'] );
 
 	grunt.registerTask( 'build', ['default', 'clean', 'copy', 'compress'] );
 
