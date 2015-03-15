@@ -1,7 +1,7 @@
 {
 	"plugin.php": "{%= js_safe_name %}.php",
 	"assets/css/less/plugin.less": "assets/css/less/{%= js_safe_name %}.less",
-	"assets/css/sass/plugin.scss": "assets/css/sass/{%= js_safe_name %}.scss",
+	"assets/css/sass/plugin.sass": "assets/css/sass/{%= js_safe_name %}.sass",
 	"assets/css/src/plugin.css": "assets/css/src/{%= js_safe_name %}.css",
 	"assets/js/src/plugin.js": "assets/js/src/{%= js_safe_name %}.js",
 	"languages/plugin.pot": "languages/{%= prefix %}.pot"

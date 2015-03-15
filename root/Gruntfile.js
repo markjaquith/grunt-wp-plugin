@@ -66,7 +66,7 @@ module.exports = function( grunt ) {
 		sass:   {
 			all: {
 				files: {
-					'assets/css/{%= js_safe_name %}.css': 'assets/css/sass/{%= js_safe_name %}.scss'
+					'assets/css/{%= js_safe_name %}.css': 'assets/css/sass/{%= js_safe_name %}.sass'
 				}
 			}
 		},
@@ -103,7 +103,7 @@ module.exports = function( grunt ) {
 		watch:  {
 			{% if ('sass' === css_type) { %}
 			sass: {
-				files: ['assets/css/sass/*.scss'],
+				files: ['assets/css/sass/*.sass'],
 				tasks: ['sass', 'cssmin'],
 				options: {
 					debounceDelay: 500
