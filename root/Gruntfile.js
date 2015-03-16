@@ -70,35 +70,22 @@ module.exports = function( grunt ) {
 			}
 		},
 
-		sass: {
-			all: {
-				files: {
-					'css/{%= prefix_dashed %}.css': 'css/{%= prefix_dashed %}.sass'
+		compass: {
+			dist: {
+				options: {
+					sassDir: 'css',
+					cssDir: 'css',
+					imagesDir: 'images',
+					sourcemap: true,
+					environment: 'production'
 				}
-			}
-		},
-
-		cssmin: {
-			options: {
-				banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
-					' *\n' +
-					' * Copyright (c) <%= grunt.template.today("yyyy") %> {%= author_name %}\n' +
-					' * Licensed GPLv2+\n' +
-					' */\n'
-			},
-			minify: {
-				expand: true,
-				cwd: 'css/',
-				src: ['{%= prefix_dashed %}.css'],
-				dest: 'css/',
-				ext: '.min.css'
 			}
 		},
 
 		watch:  {
 			sass: {
 				files: ['css/*.sass'],
-				tasks: ['sass', 'cssmin'],
+				tasks: ['compass'],
 				options: {
 					debounceDelay: 500
 				}
@@ -157,15 +144,14 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( 'grunt-contrib-coffee'   );
 	grunt.loadNpmTasks( 'grunt-coffeelint'       );
 	grunt.loadNpmTasks( 'grunt-contrib-uglify'   );
-	grunt.loadNpmTasks( 'grunt-contrib-cssmin'   );
-	grunt.loadNpmTasks( 'grunt-contrib-sass'     );
+	grunt.loadNpmTasks( 'grunt-contrib-compass'  );
 	grunt.loadNpmTasks( 'grunt-contrib-watch'    );
 	grunt.loadNpmTasks( 'grunt-contrib-clean'    );
 	grunt.loadNpmTasks( 'grunt-contrib-copy'     );
 	grunt.loadNpmTasks( 'grunt-contrib-compress' );
 
 	// Default task.
-	grunt.registerTask( 'default', ['coffeelint', 'coffee', 'jshint', 'uglify', 'sass', 'cssmin'] );
+	grunt.registerTask( 'default', ['coffeelint', 'coffee', 'jshint', 'uglify', 'compass'] );
 
 	grunt.registerTask( 'build', ['default', 'clean', 'copy', 'compress'] );
 
