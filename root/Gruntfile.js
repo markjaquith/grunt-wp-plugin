@@ -96,7 +96,7 @@ module.exports = function( grunt ) {
 			},
 			scripts: {
 				files: ['js/**/*.coffee', 'js/vendor/**/*.js'],
-				tasks: ['coffeelint', 'coffee', 'jshint', 'uglify'],
+				tasks: ['coffeelint', 'coffee', 'jshint', 'uglify', 'clean:js'],
 				options: {
 					debounceDelay: 500
 				}
@@ -104,7 +104,8 @@ module.exports = function( grunt ) {
 		},
 
 		clean: {
-			main: ['release/<%= pkg.version %>']
+			main: ['release/<%= pkg.version %>'],
+			js: ['js/*.js', '!js/*.min.js', 'js/*.src.coffee', 'js/*.js.map', '!js/*.min.js.map']
 		},
 
 		copy: {
@@ -155,7 +156,7 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( 'grunt-contrib-compress' );
 
 	// Default task.
-	grunt.registerTask( 'default', ['coffeelint', 'coffee', 'jshint', 'uglify', 'compass'] );
+	grunt.registerTask( 'default', ['coffeelint', 'coffee', 'jshint', 'uglify', 'compass', 'clean:js'] );
 
 	grunt.registerTask( 'build', ['default', 'clean', 'copy', 'compress'] );
 
