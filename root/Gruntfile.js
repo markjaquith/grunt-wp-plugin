@@ -8,6 +8,7 @@ module.exports = function( grunt ) {
 		coffee: {
 			compileWithMaps: {
 				options: {
+					join: true,
 					sourceMap: true
 				},
 				files: {
@@ -21,6 +22,9 @@ module.exports = function( grunt ) {
 			options: {
 				no_tabs: {
 					level: 'ignore'
+				},
+				max_line_length: {
+					level: 'warn'
 				},
 				indentation: {
 					level: 'ignore'
