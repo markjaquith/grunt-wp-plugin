@@ -31,7 +31,20 @@
 
 defined( 'WPINC' ) or die;
 
-// Pull in the plugin classes and initialize
-include( dirname( __FILE__ ) . '/lib/wp-stack-plugin.php' );
-include( dirname( __FILE__ ) . '/classes/plugin.php' );
-{%= prefix %}_Plugin::start( __FILE__ );
+include( dirname( __FILE__ ) . '/lib/requirements-check.php' );
+
+${%= prefix_lower %}_requirements_check = new {%= prefix %}_Requirements_Check( array(
+	'title' => '{%= title %}',
+	'php'   => '5.3',
+	'wp'    => '4.0',
+	'file'  => __FILE__,
+));
+
+if ( ${%= prefix_lower %}_requirements_check->passes() ) {
+	// Pull in the plugin classes and initialize
+	include( dirname( __FILE__ ) . '/lib/wp-stack-plugin.php' );
+	include( dirname( __FILE__ ) . '/classes/plugin.php' );
+	{%= prefix %}_Plugin::start( __FILE__ );
+}
+
+unset( ${%= prefix_lower %}_requirements_check );

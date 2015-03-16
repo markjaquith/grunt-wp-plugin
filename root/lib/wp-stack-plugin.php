@@ -12,6 +12,31 @@ if ( !class_exists( 'WP_Stack_Plugin2' ) ) {
 		protected function __construct() {}
 
 		/**
+		 * Initializes the plugin object and returns its instance
+		 *
+		 * @param string $__FILE__ the main plugin file's __FILE__ value
+		 * @return object the plugin object instance
+		 */
+		public static function start( $__FILE__ ) {
+			if ( ! isset( static::$instance ) ) {
+				static::$instance = new static();
+				static::$instance->__FILE__ == $__FILE__;
+			}
+			return static::get_instance();
+		}
+
+		/**
+		 * Returns the plugin's object instance
+		 *
+		 * @return object the plugin object instance
+		 */
+		public static function get_instance() {
+			if ( isset( static::$instance ) ) {
+				return static::$instance;
+			}
+		}
+
+		/**
 		 * Add a WordPress hook (action/filter)
 		 *
 		 * @param  mixed $hook,... first parameter is the name of the hook. If second or third parameters are included, they will be used as a priority (if an integer) or as a class method callback name (if a string)
