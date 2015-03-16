@@ -2,20 +2,9 @@ module.exports = function( grunt ) {
 
 	// Project configuration
 	grunt.initConfig( {
+
 		pkg:    grunt.file.readJSON( 'package.json' ),
-		/*
-		concat: {
-			options: {
-				stripBanners: true
-			},
-			{%= js_safe_name %}: {
-				src: [
-					'js/{%= prefix_dashed %}.js'
-				],
-				dest: 'js/{%= prefix_dashed %}.js'
-			}
-		},
-		*/
+
 		coffee: {
 			compileWithMaps: {
 				options: {
@@ -26,6 +15,7 @@ module.exports = function( grunt ) {
 				}
 			}
 		},
+
 		coffeelint: {
 			all: ['js/*.coffee'],
 			options: {
@@ -37,6 +27,7 @@ module.exports = function( grunt ) {
 				}
 			}
 		},
+
 		jshint: {
 			all: [
 				'Gruntfile.js'
@@ -56,8 +47,9 @@ module.exports = function( grunt ) {
 					exports: true,
 					module:  false
 				}
-			}		
+			}
 		},
+
 		uglify: {
 			all: {
 				files: {
@@ -77,6 +69,7 @@ module.exports = function( grunt ) {
 				}
 			}
 		},
+
 		sass: {
 			all: {
 				files: {
@@ -84,6 +77,7 @@ module.exports = function( grunt ) {
 				}
 			}
 		},
+
 		cssmin: {
 			options: {
 				banner: '/*! <%= pkg.title %> - v<%= pkg.version %>\n' +
@@ -100,6 +94,7 @@ module.exports = function( grunt ) {
 				ext: '.min.css'
 			}
 		},
+
 		watch:  {
 			sass: {
 				files: ['css/*.sass'],
@@ -110,15 +105,17 @@ module.exports = function( grunt ) {
 			},
 			scripts: {
 				files: ['js/**/*.coffee', 'js/vendor/**/*.js'],
-				tasks: ['coffeelint', 'coffee', 'jshint', /*'concat',*/ 'uglify'],
+				tasks: ['coffeelint', 'coffee', 'jshint', 'uglify'],
 				options: {
 					debounceDelay: 500
 				}
 			}
 		},
+
 		clean: {
 			main: ['release/<%= pkg.version %>']
 		},
+
 		copy: {
 			// Copy the plugin to a versioned release directory
 			main: {
@@ -137,8 +134,9 @@ module.exports = function( grunt ) {
 					'!.gitmodules'
 				],
 				dest: 'release/<%= pkg.version %>/'
-			}		
+			}
 		},
+
 		compress: {
 			main: {
 				options: {
@@ -149,25 +147,25 @@ module.exports = function( grunt ) {
 				cwd: 'release/<%= pkg.version %>/',
 				src: ['**/*'],
 				dest: '{%= prefix_dashed %}/'
-			}		
+			}
 		}
 	} );
-	
+
 	// Load other tasks
-	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.loadNpmTasks('grunt-contrib-concat');
-	grunt.loadNpmTasks('grunt-contrib-coffee');
-	grunt.loadNpmTasks('grunt-coffeelint');
-	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-contrib-cssmin');
-	grunt.loadNpmTasks('grunt-contrib-sass');
-	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks( 'grunt-contrib-clean' );
-	grunt.loadNpmTasks( 'grunt-contrib-copy' );
+	grunt.loadNpmTasks( 'grunt-contrib-jshint'   );
+	grunt.loadNpmTasks( 'grunt-contrib-concat'   );
+	grunt.loadNpmTasks( 'grunt-contrib-coffee'   );
+	grunt.loadNpmTasks( 'grunt-coffeelint'       );
+	grunt.loadNpmTasks( 'grunt-contrib-uglify'   );
+	grunt.loadNpmTasks( 'grunt-contrib-cssmin'   );
+	grunt.loadNpmTasks( 'grunt-contrib-sass'     );
+	grunt.loadNpmTasks( 'grunt-contrib-watch'    );
+	grunt.loadNpmTasks( 'grunt-contrib-clean'    );
+	grunt.loadNpmTasks( 'grunt-contrib-copy'     );
 	grunt.loadNpmTasks( 'grunt-contrib-compress' );
 
 	// Default task.
-	grunt.registerTask( 'default', ['coffeelint', 'coffee', 'jshint', /*'concat',*/ 'uglify', 'sass', 'cssmin'] );
+	grunt.registerTask( 'default', ['coffeelint', 'coffee', 'jshint', 'uglify', 'sass', 'cssmin'] );
 
 	grunt.registerTask( 'build', ['default', 'clean', 'copy', 'compress'] );
 
