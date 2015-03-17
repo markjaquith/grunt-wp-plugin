@@ -1,6 +1,6 @@
 <?php
 
-class {%= prefix %}_Requirements_Check {
+class {%= classPrefix %}_Requirements_Check {
 	private $title = '';
 	private $php = '5.2.4';
 	private $wp = '3.8';

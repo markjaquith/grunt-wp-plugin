@@ -1,7 +1,7 @@
 <?php
 defined( 'WPINC' ) or die;
 
-class {%= prefix %}_Plugin extends WP_Stack_Plugin2 {
+class {%= classPrefix %}_Plugin extends WP_Stack_Plugin2 {
 
 	/**
 	 * Constructs the object, hooks in to 'plugins_loaded'
@@ -22,6 +22,6 @@ class {%= prefix %}_Plugin extends WP_Stack_Plugin2 {
 	 * Initializes the plugin, registers textdomain, etc
 	 */
 	public function init() {
-		$this->load_textdomain( '{%= prefix_dashed %}', '/languages' );
+		$this->load_textdomain( '{%= prefixDashed %}', '/languages' );
 	}
 }

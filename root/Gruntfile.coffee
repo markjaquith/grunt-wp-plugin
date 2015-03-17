@@ -9,7 +9,7 @@ module.exports = (grunt) ->
 				sourceMap: yes
 			default:
 				files:
-					'js/{%= prefix_dashed %}.js': 'js/{%= prefix_dashed %}.coffee'
+					'js/{%= prefixDashed %}.js': 'js/{%= prefixDashed %}.coffee'
 
 		coffeelint:
 			default: [ 'js/*.coffee' ]
@@ -45,9 +45,9 @@ module.exports = (grunt) ->
 						except: [ 'jQuery' ]
 			default:
 				files: [
-					src: 'js/{%= prefix_dashed %}.js'
-					dest: 'js/{%= prefix_dashed %}.min.js'
-					sourceMapIn: 'js/{%= prefix_dashed %}.js.map'
+					src: 'js/{%= prefixDashed %}.js'
+					dest: 'js/{%= prefixDashed %}.min.js'
+					sourceMapIn: 'js/{%= prefixDashed %}.js.map'
 				]
 
 		compass:

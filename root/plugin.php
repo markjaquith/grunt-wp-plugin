@@ -7,7 +7,7 @@
  * Author:      {%= author_name %}
  * Author URI:  {%= author_url %}
  * License:     GPLv2+
- * Text Domain: {%= prefix_dashed %}
+ * Text Domain: {%= prefixDashed %}
  * Domain Path: /languages
  */
 
@@ -33,18 +33,18 @@ defined( 'WPINC' ) or die;
 
 include( dirname( __FILE__ ) . '/lib/requirements-check.php' );
 
-${%= prefix_lower %}_requirements_check = new {%= prefix %}_Requirements_Check( array(
+${%= prefixUnderscored %}_requirements_check = new {%= classPrefix %}_Requirements_Check( array(
 	'title' => '{%= title %}',
 	'php'   => '5.3',
 	'wp'    => '4.0',
 	'file'  => __FILE__,
 ));
 
-if ( ${%= prefix_lower %}_requirements_check->passes() ) {
+if ( ${%= prefixUnderscored %}_requirements_check->passes() ) {
 	// Pull in the plugin classes and initialize
 	include( dirname( __FILE__ ) . '/lib/wp-stack-plugin.php' );
 	include( dirname( __FILE__ ) . '/classes/plugin.php' );
-	{%= prefix %}_Plugin::start( __FILE__ );
+	{%= classPrefix %}_Plugin::start( __FILE__ );
 }
 
-unset( ${%= prefix_lower %}_requirements_check );
+unset( ${%= prefixUnderscored %}_requirements_check );

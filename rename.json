@@ -1,6 +1,6 @@
 {
-	"plugin.php": "{%= prefix_dashed %}.php",
-	"css/plugin.sass": "css/{%= prefix_dashed %}.sass",
-	"js/plugin.coffee": "js/{%= prefix_dashed %}.coffee",
-	"languages/plugin.pot": "languages/{%= prefix_dashed %}.pot"
+	"plugin.php": "{%= prefixDashed %}.php",
+	"css/plugin.sass": "css/{%= prefixDashed %}.sass",
+	"js/plugin.coffee": "js/{%= prefixDashed %}.coffee",
+	"languages/plugin.pot": "languages/{%= prefixDashed %}.pot"
 }

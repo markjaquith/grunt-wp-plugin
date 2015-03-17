@@ -26,9 +26,9 @@ exports.template = (grunt, init, done) ->
   init.process {}, [
     init.prompt('title', 'WP Plugin')
     {
-      name: 'prefix'
-      message: 'PHP function prefix (alpha and underscore characters only)'
-      default: 'wpplugin'
+      name: 'classPrefix'
+      message: 'PHP class_name (_Plugin is appended)'
+      default: 'My_Awesome'
     }
     init.prompt 'description', 'A WordPress plugin'
     init.prompt 'homepage', ''
@@ -53,34 +53,27 @@ exports.template = (grunt, init, done) ->
       'grunt-contrib-compress': '~0.12.0'
       'grunt-text-replace':     '~0.4.0'
 
-    # Sanitize names where we need to for PHP/JS
-    props.name = props.title.replace(/\s+/g, '-').toLowerCase()
+    # Class name prefix (e.g. Awesome_Thing)
+    props.classPrefix = props.classPrefix.replace /\W+?/i, '_'
 
-    # Development prefix (i.e. to prefix PHP function names, variables)
-    props.prefix = props.prefix.replace('/[^a-z_]/i', '')
+    # Underscored lowercase prefix (e.g. awesome_thing)
+    props.prefixUnderscored = props.classPrefix.toLowerCase()
 
-    # Lower case name
-    props.prefix_lower = props.prefix.toLowerCase()
+    # Dashed lowercase prefix (e.g. awesome-thing)
+    props.name = props.classPrefix.replace('_', '-').toLowerCase()
+    props.prefixDashed = props.name
 
-    # Development prefix in all caps (e.g. for constants)
-    props.prefix_caps = props.prefix.toUpperCase()
-
-    # Lower case dashed name
-    props.prefix_dashed = props.prefix_lower.replace /_+/g, '-'
-
-    # An additional value, safe to use as a JavaScript identifier.
-    props.js_safe_name = props.name.replace(/[\W_]+/g, '_').replace(/^(\d)/, '_$1')
-
-    # An additional value that won't conflict with NodeUnit unit tests.
-    props.js_test_safe_name = if props.js_safe_name == 'test' then 'myTest' else props.js_safe_name
-    props.js_safe_name_caps = props.js_safe_name.toUpperCase()
+    # All caps prefix (e.g. AWESOME_THING)
+    props.prefixUppercase = props.classPrefix.toUpperCase()
 
     # Files to copy and process
     files = init.filesToCopy props
 
     # Actually copy and process files
     init.copyAndProcess files, props
+
     # Generate package.json file
     init.writePackageJSON 'package.json', props
+
     # Done!
     done()
