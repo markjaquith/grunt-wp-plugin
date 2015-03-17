@@ -5,6 +5,7 @@ defined( 'WPINC' ) or die;
 if ( !class_exists( 'WP_Stack_Plugin2' ) ) {
 	class WP_Stack_Plugin2 {
 		protected static $instance;
+		protected $__FILE__;
 
 		/**
 		 * Blank protected constructor

@@ -105,6 +105,7 @@ module.exports = (grunt) ->
 					'!.gitignore'
 					'!.gitmodules'
 					'!tests/**'
+					'!bin/**'
 					'!.travis.yml'
 					'!phpunit.xml'
 				]
