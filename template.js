@@ -33,7 +33,7 @@ exports.template = function( grunt, init, done ) {
 			message: 'PHP function prefix (alpha and underscore characters only)',
 			default: 'wpplugin'
 		},
-		init.prompt( 'description', 'The best WordPress extension ever made!' ),
+		init.prompt( 'description', 'A WordPress plugin' ),
 		init.prompt( 'homepage', '' ),
 		init.prompt( 'author_name', 'Mark Jaquith' ),
 		init.prompt( 'author_email', 'mark@jaquith.me' ),
@@ -53,7 +53,8 @@ exports.template = function( grunt, init, done ) {
 			'grunt-contrib-watch':    '~0.6.1',
 			'grunt-contrib-clean':    '~0.6.0',
 			'grunt-contrib-copy':     '~0.7.0',
-			'grunt-contrib-compress': '~0.12.0'
+			'grunt-contrib-compress': '~0.12.0',
+			'grunt-text-replace':     '~0.4.0'
 		};
 
 		// Sanitize names where we need to for PHP/JS
