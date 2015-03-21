@@ -60,7 +60,7 @@ exports.template = (grunt, init, done) ->
     props.prefixUnderscored = props.classPrefix.toLowerCase()
 
     # Dashed lowercase prefix (e.g. awesome-thing)
-    props.name = props.classPrefix.replace('/_/g', '-').toLowerCase()
+    props.name = props.classPrefix.replace(/_/g, '-').toLowerCase()
     props.prefixDashed = props.name
 
     # All caps prefix (e.g. AWESOME_THING)
