@@ -54,7 +54,7 @@ exports.template = (grunt, init, done) ->
       'grunt-text-replace':     '~0.4.0'
 
     # Class name prefix (e.g. Awesome_Thing)
-    props.classPrefix = props.classPrefix.replace /\W+?/i, '_'
+    props.classPrefix = props.classPrefix.replace /\W+?/gi, '_'
 
     # Underscored lowercase prefix (e.g. awesome_thing)
     props.prefixUnderscored = props.classPrefix.toLowerCase()
