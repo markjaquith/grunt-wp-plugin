@@ -62,6 +62,11 @@ module.exports = (grunt) ->
 			default: {}
 
 		watch:
+			php:
+				files: [ '**/*.php' ]
+				tasks: [ 'phpunit' ]
+				options:
+					debounceDelay: 5000
 			sass:
 				files: [ 'css/*.sass' ]
 				tasks: [ 'compass' ]
