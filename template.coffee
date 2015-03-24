@@ -52,6 +52,7 @@ exports.template = (grunt, init, done) ->
       'grunt-contrib-copy':     '~0.7.0'
       'grunt-contrib-compress': '~0.12.0'
       'grunt-text-replace':     '~0.4.0'
+      'grunt-phpunit':          '~0.3.6'
 
     # Class name prefix (e.g. Awesome_Thing)
     props.classPrefix = props.classPrefix.replace /\W+?/gi, '_'

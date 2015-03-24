@@ -58,6 +58,9 @@ module.exports = (grunt) ->
 				sourcemap: yes
 				environment: 'production'
 
+		phpunit:
+			default: {}
+
 		watch:
 			sass:
 				files: [ 'css/*.sass' ]
@@ -152,6 +155,7 @@ module.exports = (grunt) ->
 	grunt.loadNpmTasks 'grunt-contrib-copy'
 	grunt.loadNpmTasks 'grunt-contrib-compress'
 	grunt.loadNpmTasks 'grunt-text-replace'
+	grunt.loadNpmTasks 'grunt-phpunit'
 
 	# Default task
 	grunt.registerTask 'default', [
