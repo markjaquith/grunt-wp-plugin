@@ -1,4 +1,19 @@
 module.exports = (grunt) ->
+	# Regex, used twice
+	readmeReplacements = [
+		from: /^# (.*?)( #+)?$/mg
+		to: '=== $1 ==='
+	,
+		from: /^## (.*?)( #+)?$/mg
+		to: '== $1 =='
+	,
+		from: /^### (.*?)( #+)?$/mg
+		to: '= $1 ='
+	,
+		from: /^Stable tag:\s*?[\w.-]+(\s*?)$/mi
+		to: 'Stable tag: <%= pkg.version %>$1'
+	]
+
 	# Project configuration
 	grunt.initConfig
 		pkg: grunt.file.readJSON('package.json')
@@ -87,14 +102,37 @@ module.exports = (grunt) ->
 				options:
 					debounceDelay: 500
 
+		svn_checkout:
+			default:
+				repos: [
+					path: [ 'release/svn' ]
+					repo: 'http://plugins.svn.wordpress.org/<%= pkg.name %>'
+				]
+
+		push_svn:
+			options:
+				remove: yes
+			default:
+				src: 'release/svn/<%= pkg.name %>'
+				dest: 'http://plugins.svn.wordpress.org/<%= pkg.name %>'
+				tmp: 'release/tmp/'
+
 		clean:
-			release: [ 'release/<%= pkg.version %>' ]
+			release: [
+				'release/<%= pkg.version %>'
+				'release/svn/<%= pkg.name %>/trunk'
+				'release/svn/<%= pkg.name %>/tags/<%= pkg.version %>'
+			]
 			js: [
 				'js/*.js'
 				'!js/*.min.js'
 				'js/*.src.coffee'
 				'js/*.js.map'
 				'!js/*.min.js.map'
+			]
+			svn_readme_md: [
+				'release/svn/<%= pkg.name %>/trunk/readme.md'
+				'release/svn/<%= pkg.name %>/tags/<%= pkg.version %>/readme.md'
 			]
 
 		copy:
@@ -103,10 +141,9 @@ module.exports = (grunt) ->
 					'**'
 					'!node_modules/**'
 					'!release/**'
+					'!assets/**'
 					'!.git/**'
 					'!.sass-cache/**'
-					'!css/**/*.sass'
-					'!js/**/*.coffee'
 					'!img/src/**'
 					'!Gruntfile.*'
 					'!package.json'
@@ -118,6 +155,21 @@ module.exports = (grunt) ->
 					'!phpunit.xml'
 				]
 				dest: 'release/<%= pkg.version %>/'
+			svn_trunk:
+				cwd: 'release/<%= pkg.version %>/'
+				expand: yes
+				src: '**'
+				dest: 'release/svn/<%= pkg.name %>/trunk/'
+			svn_tag:
+				cwd: 'release/<%= pkg.version %>/'
+				expand: yes
+				src: '**'
+				dest: 'release/svn/<%= pkg.name %>/tags/<%= pkg.version %>/'
+			svn_assets:
+				cwd: 'assets/'
+				expand: yes
+				src: '**'
+				dest: 'release/svn/<%= pkg.name %>/assets/'
 
 		replace:
 			header:
@@ -137,6 +189,14 @@ module.exports = (grunt) ->
 					from: /^(\s*?)const(\s+?)CSS_JS_VERSION(\s*?)=(\s+?)'[^']+';/m
 					to: "$1const$2CSS_JS_VERSION$3=$4'<%= pkg.version %>-release';"
 				]
+			svn_trunk_readme:
+				src: [ 'release/svn/<%= pkg.name %>/trunk/readme.md' ]
+				dest: 'release/svn/<%= pkg.name %>/trunk/readme.txt'
+				replacements: readmeReplacements
+			svn_tag_readme:
+				src: [ 'release/svn/<%= pkg.name %>/tags/<%= pkg.version %>/readme.md' ]
+				dest: 'release/svn/<%= pkg.name %>/tags/<%= pkg.version %>/readme.txt'
+				replacements: readmeReplacements
 
 		compress:
 			default:
@@ -161,9 +221,13 @@ module.exports = (grunt) ->
 	grunt.loadNpmTasks 'grunt-contrib-compress'
 	grunt.loadNpmTasks 'grunt-text-replace'
 	grunt.loadNpmTasks 'grunt-phpunit'
+	grunt.loadNpmTasks 'grunt-svn-checkout'
+	grunt.loadNpmTasks 'grunt-push-svn'
 
 	# Default task
 	grunt.registerTask 'default', [
+		'replace:header'
+		'replace:plugin'
 		'coffeelint'
 		'coffee'
 		'jshint'
@@ -174,11 +238,28 @@ module.exports = (grunt) ->
 
 	# Build task
 	grunt.registerTask 'build', [
-		'replace'
 		'default'
 		'clean'
-		'copy'
-		'compress'
+		'copy:main'
+		'compress' # Can comment this out for WordPress.org plugins
+	]
+
+	# Prepare a WordPress.org release
+	grunt.registerTask 'release:prepare', [
+		'svn_checkout'
+		'build'
+		'copy:svn_trunk'
+		'copy:svn_tag'
+		'copy:svn_assets'
+		'replace:svn_trunk_readme'
+		'replace:svn_tag_readme'
+		'clean:svn_readme_md'
+	]
+
+	# WordPress.org release task
+	grunt.registerTask 'release', [
+		'release:prepare'
+		'push_svn'
 	]
 
 	grunt.util.linefeed = '\n'
