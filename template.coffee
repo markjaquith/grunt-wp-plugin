@@ -1,12 +1,19 @@
 ###
+# ================================================
 # grunt-wp-plugin
 # https://github.com/10up/grunt-wp-plugin
 #
 # Copyright (c) 2013 Eric Mann, 10up
 #
-# Subsequent modifications (c) 2015 Mark Jaquith
+# Licensed under the MIT License
+# ================================================
+# Subsequent modifications
+# https://github.com/markjaquith/grunt-wp-plugin
+#
+# Copyright (c) 2015 Mark Jaquith
 #
 # Licensed under the MIT License
+# ================================================
 ###
 
 # Basic template description
