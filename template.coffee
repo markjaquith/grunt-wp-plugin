@@ -38,10 +38,10 @@ exports.template = (grunt, init, done) ->
       default: 'My_Awesome'
     }
     init.prompt 'description', 'A WordPress plugin'
-    init.prompt 'homepage', ''
-    init.prompt 'author_name', 'Mark Jaquith'
-    init.prompt 'author_email', 'mark@jaquith.me'
-    init.prompt 'author_url', 'http://markjaquith.com/'
+    init.prompt 'homepage'
+    init.prompt 'author_name'
+    init.prompt 'author_email'
+    init.prompt 'author_url'
   ], (err, props) ->
     props.keywords = []
     props.version = '0.1.0'
