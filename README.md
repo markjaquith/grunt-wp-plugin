@@ -67,6 +67,13 @@ To watch for changed `.coffee`, `.sass`, and `.php` files (and perform the appro
 grunt watch
 ```
 
+To run PHPUnit tests:
+
+```bash
+grunt phpunit
+```
+
+
 To sync changes up to the WordPress.org SVN plugin repository:
 
 ```bash
@@ -86,6 +93,8 @@ grunt release:prepare
 * If you have more than one Sass or CoffeeScript file, you'll have to add them to various places in `Gruntfile.coffee` (I want to refactor this to have just one array of files in the Gruntfile, so it's more DRY).
 
 * Note the `assets` directory for WordPress.org-hosted plugin banners.
+
+* PHPUnit support requires a globally available WordPress core install, and the following to be set: `export WP_TESTS_DIR=/path/to/wp/checkout/trunk/tests/phpunit/`
 
 ## Can I contribute?
 
