@@ -45,6 +45,7 @@ exports.template = (grunt, init, done) ->
   ], (err, props) ->
     props.keywords = []
     props.version = '0.1.0'
+    props.private = yes
     props.devDependencies =
       'grunt':                  '~0.4.5'
       'grunt-contrib-concat':   '~0.5.0'
