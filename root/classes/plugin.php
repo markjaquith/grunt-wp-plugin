@@ -3,6 +3,8 @@ defined( 'WPINC' ) or die;
 
 class {%= classPrefix %}_Plugin extends WP_Stack_Plugin2 {
 
+	protected static $instance;
+
 	/**
 	 * Constructs the object, hooks in to 'plugins_loaded'
 	 */
