@@ -34,7 +34,7 @@ exports.template = (grunt, init, done) ->
     init.prompt('title', 'WP Plugin')
     {
       name: 'classPrefix'
-      message: 'PHP class_name (_Plugin is appended)'
+      message: 'PHP class name (_Plugin is appended)'
       default: 'My_Awesome'
     }
     init.prompt 'description', 'A WordPress plugin'
@@ -42,6 +42,16 @@ exports.template = (grunt, init, done) ->
     init.prompt 'author_name'
     init.prompt 'author_email'
     init.prompt 'author_url'
+    {
+      name: 'wporg_username'
+      message: 'WordPress.org username'
+    }
+    {
+      name: 'travis_username'
+      message: 'Travis-CI username'
+      default: (value, props, done) ->
+        done null, props.wporg_username
+    }
   ], (err, props) ->
     props.keywords = []
     props.version = '0.1.0'

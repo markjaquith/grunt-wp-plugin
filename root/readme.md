@@ -1,5 +1,8 @@
 # {%= title %} #
-Contributors:      markjaquith
+
+[![Build Status](https://travis-ci.org/{%= travis_username %}/{%= name %}.svg?branch=master)](https://travis-ci.org/{%= travis_username %}/{%= name %})
+
+Contributors:      {%= wporg_username %}  
 Donate link:       http://txfx.net/wordpress-plugins/donate  
 Tags:  
 Requires at least: 4.1  
