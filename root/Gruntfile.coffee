@@ -66,12 +66,13 @@ module.exports = (grunt) ->
 				files: coffee_uglify_files
 
 		compass:
-			options:
-				sassDir: 'css'
-				cssDir: 'css'
-				imagesDir: 'images'
-				sourcemap: yes
-				environment: 'production'
+			default:
+				options:
+					sassDir: 'css'
+					cssDir: 'css'
+					imagesDir: 'images'
+					sourcemap: yes
+					environment: 'production'
 
 		phpunit:
 			default: {}
