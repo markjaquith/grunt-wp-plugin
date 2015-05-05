@@ -92,6 +92,7 @@ module.exports = (grunt) ->
 				files: [
 					'js/**/*.coffee'
 					'js/vendor/**/*.js'
+					'!js/**/*.src.coffee'
 				]
 				tasks: [
 					'coffeelint'
