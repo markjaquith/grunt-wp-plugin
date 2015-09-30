@@ -159,7 +159,7 @@ module.exports = (grunt) ->
 				src: [ '<%= pkg.name %>.php' ]
 				overwrite: yes
 				replacements: [
-					from: /^Version:(\s*?)[\w.-]+$/m
+					from: /^Version:(\s*?)[a-zA-Z0-9.-]+$/m
 					to: 'Version: <%= pkg.version %>'
 				]
 			plugin:
@@ -185,7 +185,7 @@ module.exports = (grunt) ->
 					from: /^### (.*?)( #+)?$/mg
 					to: '= $1 ='
 				,
-					from: /^Stable tag:\s*?[\w.-]+(\s*?)$/mi
+					from: /^Stable tag:\s*?[a-zA-Z0-9.-]+(\s*?)$/mi
 					to: 'Stable tag: <%= pkg.version %>$1'
 				]
 
