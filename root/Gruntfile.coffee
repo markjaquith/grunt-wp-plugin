@@ -159,8 +159,8 @@ module.exports = (grunt) ->
 				src: [ '<%= pkg.name %>.php' ]
 				overwrite: yes
 				replacements: [
-					from: /^Version:(\s*?)[a-zA-Z0-9.-]+$/m
-					to: 'Version: <%= pkg.version %>'
+					from: /Version:(\s*?)[a-zA-Z0-9.-]+$/m
+					to: 'Version:$1<%= pkg.version %>'
 				]
 			plugin:
 				src: [ 'classes/plugin.php' ]
