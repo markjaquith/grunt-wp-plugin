@@ -236,7 +236,6 @@ module.exports = (grunt) ->
 
 	# Prepare a WordPress.org release
 	grunt.registerTask 'release:prepare', [
-		'build'
 		'copy:svn'
 		'replace:svn_readme'
 		'clean:svn_readme_md'
@@ -249,6 +248,9 @@ module.exports = (grunt) ->
 
 	# WordPress.org release task
 	grunt.registerTask 'release', [
+		# Everyone builds
+		'build'
+		# Only for WordPress.org
 		'release:prepare'
 		'release:deploy'
 	]
