@@ -35,8 +35,8 @@ include( dirname( __FILE__ ) . '/lib/requirements-check.php' );
 
 ${%= prefixUnderscored %}_requirements_check = new {%= classPrefix %}_Requirements_Check( array(
 	'title' => '{%= title %}',
-	'php'   => '5.3',
-	'wp'    => '4.0',
+	'php'   => '5.4',
+	'wp'    => '4.5',
 	'file'  => __FILE__,
 ));
 
