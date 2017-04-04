@@ -62,7 +62,7 @@ exports.template = (grunt, init, done) ->
       'grunt-contrib-coffee':   '~0.13.0'
       'grunt-coffeelint':       '~0.0.13'
       'grunt-contrib-uglify':   '~0.6.0'
-      'grunt-contrib-compass':  '~1.0.1'
+      'grunt-contrib-compass':  '~1.1.1'
       'grunt-contrib-jshint':   '~0.11.1'
       'grunt-contrib-nodeunit': '~0.4.1'
       'grunt-contrib-watch':    '~0.6.1'
