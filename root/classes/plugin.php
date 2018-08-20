@@ -92,6 +92,35 @@ class {%= classPrefix %}_Plugin {
 	}
 
 	/**
+	 * Returns the URL to the plugin directory
+	 *
+	 * @return string the URL to the plugin directory
+	 */
+	public function get_url() {
+		return plugin_dir_url( $this->__FILE__ );
+	}
+
+	/**
+	 * Returns the path to the plugin directory
+	 *
+	 * @return string the absolute path to the plugin directory
+	 */
+	public function get_path() {
+		return plugin_dir_path( $this->__FILE__ );
+	}
+
+	/**
+	 * Loads the textdomain for this plugin.
+	 *
+	 * @param string $name The name.
+	 * @param string $path The path.
+	 * @return bool Result of load_plugin_textdomain().
+	 */
+	public function load_textdomain( $name, $path ) {
+		return load_plugin_textdomain( $name, false, basename( dirname( $this->__FILE__ ) ) . $path );
+	}
+
+	/**
 	 * Adds hooks.
 	 */
 	public function add_hooks() {
