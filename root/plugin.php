@@ -36,15 +36,14 @@ include( dirname( __FILE__ ) . '/lib/requirements-check.php' );
 ${%= prefixUnderscored %}_requirements_check = new {%= classPrefix %}_Requirements_Check( array(
 	'title' => '{%= title %}',
 	'php'   => '5.4',
-	'wp'    => '4.5',
+	'wp'    => '4.9',
 	'file'  => __FILE__,
 ));
 
 if ( ${%= prefixUnderscored %}_requirements_check->passes() ) {
-	// Pull in the plugin classes and initialize
-	include( dirname( __FILE__ ) . '/lib/wp-stack-plugin.php' );
+	// Pull in the plugin classes and initialize.
 	include( dirname( __FILE__ ) . '/classes/plugin.php' );
-	{%= classPrefix %}_Plugin::start( __FILE__ );
+	new {%= classPrefix %}_Plugin( __FILE__ );
 }
 
 unset( ${%= prefixUnderscored %}_requirements_check );

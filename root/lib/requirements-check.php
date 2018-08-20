@@ -2,8 +2,8 @@
 
 class {%= classPrefix %}_Requirements_Check {
 	private $title = '';
-	private $php = '5.2.4';
-	private $wp = '3.8';
+	private $php = '5.4.0';
+	private $wp = '4.9.0';
 	private $file;
 
 	public function __construct( $args ) {
