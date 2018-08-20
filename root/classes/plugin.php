@@ -32,7 +32,7 @@ class {%= classPrefix %}_Plugin {
 	function __construct( $file ) {
 		self::$instance       = $this;
 		self::$instance->file = $file;
-		$this->hook( 'init', 'add_hooks' );
+		$this->add_hooks();
 	}
 
 	/**
